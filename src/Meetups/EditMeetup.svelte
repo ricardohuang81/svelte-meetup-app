@@ -1,9 +1,12 @@
 <script>
+  import meetups from './meetups-store.js';
   import { createEventDispatcher } from 'svelte';
   import TextInput from '../UI/TextInput.svelte';
   import Button from '../UI/Button.svelte';
   import Modal from '../UI/Modal.svelte';
   import { isEmpty, isValidEmail } from '../helpers/validation.js';
+
+  export let id = null;
 
   let title = '';
   let subtitle = '';
@@ -11,6 +14,19 @@
   let imageUrl = '';
   let address = '';
   let email = '';
+
+  if (id) {
+    const unsubscribe = meetups.subscribe(items => {
+      const selectedMeetup = items.find(item => item.id === id);
+      title = selectedMeetup.title;
+      subtitle = selectedMeetup.subtitle;
+      description = selectedMeetup.description;
+      imageUrl = selectedMeetup.imageUrl;
+      address = selectedMeetup.address;
+      email = selectedMeetup.contactEmail;
+    });
+    unsubscribe();
+  }
 
   const dispatch = createEventDispatcher();
 
@@ -23,14 +39,25 @@
   $: formIsValid = titleValid && subtitleValid && descriptionValid && imageUrlValid && addressValid && emailValid;
 
   function submitForm () {
-    dispatch('save', {
-      title: title,
-      subtitle: subtitle,
-      description: description,
-      imageUrl: imageUrl,
-      address: address,
-      email: email
-    });
+    const meetupData = {
+			title: title,
+			subtitle: subtitle,
+			description: description,
+			imageUrl: imageUrl,
+			address: address,
+			contactEmail: email
+    };
+    if (id) {
+      meetups.updateMeetup(id, meetupData);
+    } else {
+      meetups.addMeetup(meetupData);
+    }
+    dispatch('save');
+  }
+
+  function deleteMeetup() {
+    meetups.removeMeetup(id);
+    dispatch('save');
   }
 
   function cancel () {
@@ -99,5 +126,8 @@
     <div slot="footer">
       <Button type="button" mode="outline" on:click="{cancel}">Cancel</Button>
       <Button type="button" on:click="{submitForm}" disabled={!formIsValid}>Save</Button>
+      {#if id}
+        <Button type="button" on:click="{deleteMeetup}">Delete</Button>
+      {/if}
     </div>
   </Modal>
