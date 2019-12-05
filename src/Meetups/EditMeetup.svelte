@@ -48,15 +48,56 @@
 			contactEmail: email
     };
     if (id) {
+      fetch(`https://svelte-http-request.firebaseio.com/meetups/${id}.json`, {
+        method: 'PATCH',
+        body: JSON.stringify(meetupData),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('WRONG! Error!')
+        }
+        meetups.updateMeetup(id, meetupData);
+      })
+      .catch(err => {
+        console.log(err);
+      });
       meetups.updateMeetup(id, meetupData);
     } else {
-      meetups.addMeetup(meetupData);
+      fetch('https://svelte-http-request.firebaseio.com/meetups.json', {
+        method: 'POST',
+        body: JSON.stringify({ ...meetupData, isFavorite: false }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Fail! Error!');
+        }
+        return res.json();
+      })
+      .then(data => {
+        meetups.addMeetup({ ...meetupData, isFavorite: false, id: data.name });
+      })
+      .catch(err => {
+        console.log(err);
+      });
     }
     dispatch('save');
   }
 
   function deleteMeetup() {
-    meetups.removeMeetup(id);
+    fetch(`https://svelte-http-request.firebaseio.com/meetups/${id}.json`, {
+      method: 'DELETE'
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('No soup for you! Error!')
+        }
+        meetups.removeMeetup(id);
+      })
+      .catch(err => {
+        console.log(err);
+      });
     dispatch('save');
   }
 

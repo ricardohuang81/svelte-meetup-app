@@ -32,6 +32,9 @@
     display: flex;
     justify-content: space-between;
   }
+  #no-meetups {
+    margin: 1rem;
+  }
   @media (min-width: 768px) {
     #meetups {
       grid-template-columns: repeat(2, 1fr);
@@ -44,7 +47,9 @@
     New Meetdown
   </Button>
 </section>
-
+{#if filteredMeetups.length === 0}
+  <p id="no-meetups">No meetdowns found, start adding!</p>
+{/if}
 <section id="meetups">
 	{#each filteredMeetups as meetup (meetup.id)}
     <div transition:scale animate:flip={{duration: 300}}>
