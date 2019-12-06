@@ -12,12 +12,12 @@
   }
 
   button {
-    background: #aaaaaa;
-    color: #E0FFFF;
+    background: #A9A9A9;
+    color: #00FFFF;
     font: inherit;
     font-size: 1rem;
     cursor: pointer;
-    border: 1px solid #aaaaaa;
+    border: 1px solid #A9A9A9;
     padding: 0.5rem 1rem;
   }
 
@@ -38,7 +38,7 @@
   .active {
     background: #FF00FF;
     border-color: #FF00FF;
-    color: #E0FFFF;
+    color: #FFFF00;
   }
 </style>
 

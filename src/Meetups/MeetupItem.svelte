@@ -70,12 +70,12 @@
     font-family: 'Bebas Neue', cursive;
   }
 
-  h1.is-favorite {
+  /* h1.is-favorite {
     background: #01a129;
     color: white;
     padding: 0 0.5rem;
     border-radius: 5px;
-  }
+  } */
 
   h2 {
     font-family: 'Bebas Neue', cursive;

@@ -56,14 +56,14 @@ button:disabled:active {
 
 .outline {
   background: transparent;
-  color: #C71585;
+  color: #4169E1;
   box-shadow: none;
-  border: 1px solid #FFC0CB;
+  border: 1px solid #F4A460;
 }
 
 .outline:hover,
 .outline:active {
-  background: #ffc7de;
+  background: #FFDEAD;
   box-shadow: none;
 }
 
@@ -76,7 +76,7 @@ button:disabled:active {
 
 .outline.success {
   border-color: #00CED1;
-  color: #00CED1;
+  color: #FF7F50;
 }
 
 .outline.success:hover,
