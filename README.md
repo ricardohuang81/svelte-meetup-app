@@ -1,6 +1,6 @@
-## Svelte Single Page Application (SPA) that allows user to create, edit, favorite, and delete Meetdowns hosted on AWS S3 (see url in description above) and ZEIT Now:
+# Svelte Single Page Application (SPA) that allows user to create, edit, favorite, and delete Meetdowns hosted on AWS S3 (see url in description above) and ZEIT Now
 
-### [https://svelte-meetup-app.now.sh/](https://svelte-meetup-app.now.sh/)
+## [https://svelte-meetup-app.now.sh/](https://svelte-meetup-app.now.sh/)
 
 ---
 
